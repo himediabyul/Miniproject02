@@ -1,198 +1,183 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: cheoho-hi
-  Date: 2022-11-24
-  Time: 오후 12:51
-  To change this template use File | Settings | File Templates.
---%>
+<!DOCTYPE HTML>
+<!--
+Editorial by HTML5 UP
+html5up.net | @ajlkn
+Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 
-  <title>Title</title>
+  <title>다있소</title>
 
-  <link href="/css/bootstrap/bootstrap.min.css" rel="stylesheet">
-
-  <link href="/css/bootstrap/offcanvas.css" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <link rel="stylesheet" href="/css/main.css" />
 
 </head>
-<body class="bg-light">
+<body class="is-preload">
 
-<nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark">
+<!-- Wrapper -->
+<div id="wrapper">
 
-  <a class="navbar-brand mr-auto mr-lg-0" href="/index">다있소</a>
+  <!-- Main -->
+  <div id="main">
 
-  <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <div class="inner">
 
-  <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+      <!-- Header -->
+      <header id="header">
 
-    <ul class="navbar-nav mr-auto">
+        <a href="/index.jsp" class="logo"><strong>다있소</strong> ShoppingMall</a>
+        <div class="align-right">
+          <ul>
 
-      <li class="nav-item active">
-        <a class="nav-link" href="/sale/list">전체 <span class="sr-only">(current)</span></a>
-      </li>
+            <c:if test="${loginInfo eq null}">
+              <a href="/login">로그인</a><br>
+              <a href="/member/register">회원가입</a>
+            </c:if>
 
-      <li class="nav-item active">
-        <a class="nav-link" href="#">상의</a>
-      </li>
+            <c:if test="${loginInfo ne null}">
+              ${loginInfo.uname}님 환영합니다.<br>
+              <a href="/logout"> 로그아웃 </a><br>
+            </c:if>
 
-      <li class="nav-item">
-        <a class="nav-link" href="#">하의</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" href="#">잡화</a>
-      </li>
-
-      <li class="nav-item dropdown">
-
-
-
-        <div class="dropdown-menu" aria-labelledby="dropdown01">
-          <a class="dropdown-item" href="#">Action</a>
-          <a class="dropdown-item" href="#">Another action</a>
-          <a class="dropdown-item" href="#">Something else here</a>
+          </ul>
         </div>
 
-      </li>
+      </header>
 
-    </ul>
 
-    <form class="form-inline my-2 my-lg-0">
+      <!-- Section -->
+      <section>
 
-      ${loginInfo.uname}
-      <a class="btn btn-success" href="/logout">로그아웃</a>
+        <header class="major">
+          <h2>ALL LIST</h2>
+        </header>
 
-    </form>
+        <div class="features">
+
+          <div class="container">
+
+            <div class="row">
+
+              <c:forEach var="sale" items="${list}">
+
+                <div class="col-md-4">
+
+                  <div class="card"  style="width: 18rem;">
+
+                    <img src="/image/${sale.image}" width="200px" class="card-img-top">
+
+                    <div class="card-body">
+                      <h5 class="card-title">${sale.pname}</h5>
+                      <p class="card-text"></p>
+                    </div>
+
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">상품가격 : ${sale.price}</li>
+                      <li class="list-group-item">상품번호 : ${sale.pnumber}</li>
+                      <li class="list-group-item">카테고리 : ${sale.category}</li>
+                    </ul>
+
+                    <div class="card-body">
+                      <a href="/sale/read?pnumber=${sale.pnumber}" class="card-link">상세보기</a>
+                    </div>
+
+                  </div>
+
+                </div>
+
+              </c:forEach>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <a href="/sale/save" style="margin-left: 1000px">상품 등록</a>
+
+    </div>
 
   </div>
 
-</nav>
 
-<%--<div class="nav-scroller bg-white box-shadow">
-  <nav class="nav nav-underline">
-    <a class="nav-link active" href="#">Dashboard</a>
-    <a class="nav-link" href="#"> Friends <span class="badge badge-pill bg-light align-text-bottom">27</span></a>
-    <a class="nav-link" href="#">Explore</a>
-    <a class="nav-link" href="#">Suggestions</a>
-        <a class="nav-link" href="#">Link</a>
-        <a class="nav-link" href="#">Link</a>
-        <a class="nav-link" href="#">Link</a>
-        <a class="nav-link" href="#">Link</a>
-        <a class="nav-link" href="#">Link</a>
-  </nav>
-</div>--%>
 
-<main role="main" class="container">
+  <!-- Sidebar -->
+  <div id="sidebar">
 
-  <div class="d-flex align-items-center p-3 my-3 text-white-50 bg-primary rounded box-shadow">
+    <div class="inner">
 
-    <img class="mr-3" src="https://icons.getbootstrap.com/assets/img/icons-hero.png" alt="" width="48" height="48">
+      <!-- Search -->
+      <section id="search" class="alt">
 
-    <div class="lh-100">
+        <form>
 
-      <h6 class="mb-0 text-white lh-100">전체 리스트</h6>
-      <small>상의 하의 잡화</small>
+          <select name="searchType">
+            <option value="pname">상품명</option>
+            <option value="price">금액</option>
+          </select>
+
+          <input type="text" name="keyWord" placeholder="Search" />
+
+        </form>
+
+      </section>
+
+
+      <!-- Menu -->
+      <nav id="menu">
+
+        <header class="major">
+          <h2>Menu</h2>
+        </header>
+
+        <ul>
+          <li><a href="/index">HOMEPAGE</a></li>
+          <li><a href="/sale/list">ALLLIST</a></li>
+          <li><a href="/sale/list1">TOP</a></li>
+          <li><a href="/sale/list2">BOTTOM</a></li>
+          <li><a href="/sale/list3">ACC</a></li>
+        </ul>
+
+      </nav>
+
+
+      <!-- Section -->
+      <section>
+
+        <header class="major">
+          <h2>INFO</h2>
+        </header>
+        <p>회사명 : 하이미디어 </p>
+        <p>브랜드명 : 다있소</p>
+        <p>주소 : 서울시 강동구 천호동 동원빌딩</p>
+
+
+        <ul class="contact">
+          <li class="icon solid fa-envelope"><a href="#">himidea@naver.com</a></li>
+          <li class="icon solid fa-phone">010-1234-5678</li>
+        </ul>
+
+      </section>
+
 
     </div>
 
   </div>
 
-  <div class="my-3 p-3 bg-white rounded box-shadow">
+</div>
 
-    <h6 class="border-bottom border-gray pb-2 mb-0">전체 리스트</h6>
-
-    <div class="m-3 p-1 border" >
-
-      <form>
-
-        <table>
-
-          <tr>
-            <td class="p-2">검색</td>
-            <td class="p-2">
-
-              <select class="form-control"  name="searchType">
-                <option value="pname">상품명</option>
-                <option value="price">금액</option>
-              </select>
-
-            </td>
-
-            <td class="p-2">
-              <input type="text" class="form-control" name="keyWord">
-            </td>
-
-            <td class="p-2">
-              <input type="submit" class="btn btn-info" value="검색">
-            </td>
-
-          </tr>
-
-        </table>
-
-      </form>
-
-    </div>
-
-    <table class="table table-striped table-bordered text-center">
-
-      <thead class="thead-dark">
-
-      <tr>
-
-        <th>상품번호</th>
-        <th></th>
-        <th>상품명</th>
-        <th>판매금액</th>
-
-      </tr>
-
-      </thead>
-
-      <c:forEach var="sale" items="${list}">
-
-        <tr>
-
-          <td>${sale.pnumber}</td>
-          <td><a href="/sale/read?pnumber=${sale.pnumber}"><img src="/image/${sale.image}" id="img"></a></td>
-          <td><a href="/sale/read?pnumber=${sale.pnumber}">${sale.pname}</a></td>
-          <td>${sale.price}</td>
-
-        </tr>
-
-      </c:forEach>
-
-    </table>
-
-
-    <small class="d-block text-right mt-3">
-      <a class="btn btn-success" href="/sale/save">상품 등록</a> <a class="btn btn-primary" href="/index">홈으로</a>
-    </small>
-
-  </div>
-
-</main>
-
-
-<%--<script>--%>
-<%--  function deleteDept(no){--%>
-<%--    if(confirm("삭제하시겠습니까?")){--%>
-<%--      location.href = '/dept/delete?deptno='+no;--%>
-<%--    }--%>
-<%--  }--%>
-<%--</script>--%>
-
-
-<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-<script>window.jQuery || document.write('<script src="js/assets/vendor/jquery-slim.min.js"><\/script>')</script>
-<script src="js/assets/vendor/popper.min.js"></script>
-<script src="js/bootstrap/bootstrap.min.js"></script>
-<script src="js/assets/js/vendor/holder.min.js"></script>
-<script src="js/bootstrap/offcanvas.js"></script>
+<!-- Scripts -->
+<script src="/js/jquery.min.js"></script>
+<script src="/js/browser.min.js"></script>
+<script src="/js/breakpoints.min.js"></script>
+<script src="/js/util.js"></script>
+<script src="/js/main.js"></script>
 
 </body>
 </html>

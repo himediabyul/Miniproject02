@@ -6,14 +6,11 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Mapper
 public interface SaleMapper {
 
-    @Select("select * from sale")
-    List<Sale> saleList();
 
     int saleSave(Sale sale);
 
@@ -26,5 +23,11 @@ public interface SaleMapper {
     int saleDelete(int pnumber);
 
     List<Sale> searchOptionByAll(SearchOption searchOption);
+
+    List<Sale> categoryOne(Sale sale);
+
+    List<Sale> categoryTwo(Sale sale);
+
+    List<Sale> categoryThree(Sale sale);
 
 }
